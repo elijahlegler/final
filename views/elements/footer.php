@@ -33,33 +33,41 @@
 
    </script>
 
+
+
+
 <?php   }
-?>
-
-<script>
-
-$(document).ready(function() {
-  $('.post-loader').click(function(event) {
-
-    event.preventDefault();
-    var el = $(this);
-
-    $.ajax({
-      url:el.attr('href'),
-      type:'GET',
-      success:function(data) {
-        el.parent().append(data);
-        el.remove();
-      }
-    });
-
-  });
-
-});
 
 
 
-</script>
+
+   ?>
+
+   <script>
+       $(document).ready(function() {
+
+           $('.post-loader').click(function(event) {
+               event.preventDefault();
+               var el = $(this);
+
+               $.ajax({
+                  url:el.attr('href'),
+                  type:'GET',
+                  success:function(data) {
+                    el.parent().append(data);
+                    el.remove();
+
+
+                  }
+
+
+                });
+
+           });
+       });
+    </script>
+
+
 
   </body>
 </html>

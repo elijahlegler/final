@@ -1,21 +1,25 @@
 <?php
 
 class AjaxController extends Controller{
-
+	
 	protected $postObject;
-	protected $userObject;
-	protected $categoryObject;
+    protected $userObject;
+    protected $categoryObject;
 
+	
 	public function index(){
-		$this->set('response', "Invalid Request");
+		$this->set("response","Invalid Request");
 	}
 
-	public function get_post_content() {
+    public function get_post_content() {
 
-		$this->postObject = new Post();
-		$post = $this->postObject->getPost($_GET['pID']);
-		$this->set('response', $post['content']);
-	}
+        $this->postObject = new Post();
+        $post = $this->postObject->getPost($_GET['pID']);
+        $this->set('response',$post['content']);
+
+
+    }
+	
 }
 
 ?>

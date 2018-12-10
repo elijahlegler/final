@@ -1,19 +1,33 @@
 <?php
 
 class HomeController extends Controller{
-
+	
 	public function index(){
-		$feed = 'http://www.espn.com/espn/rss/news';
-		$rss = new RSSDisplay($feed);
+        $rss = new RssDisplay("http://fox59.com/feed/");
 
-		$items = $rss->getFeedItems(8);
-		$this->set('item_array', $items);
+        $html = "";
 
-		$channel_data = $rss->getChannelInfo();
-		$channel_title = $channel_data->channel->generator;
-		$this->set('rss_title', $channel_title);
+        $data = $rss->getFeedItems(8);
+        $channel = $rss->getChannelInfo();
+
+        $feed_title = $channel->title;
+
+        $this->set('title',$feed_title);
+
+        foreach($data as $value) {
+            $read_date = strtotime($value->pubDate);
+            date_default_timezone_set('America/New_York');
+            $read_date =  date("F j, Y, g:i a",$read_date);
+
+            $html.= '<div><h4><a href="'.$value->link.'">'.$value -> title.'</a> ('.$read_date.')</h4><p>'.$value->description.'</p></div><hr/>';
+        }
+
+
+
+        $this->set('data',$html);
+
 	}
-
+	
 }
 
 ?>
